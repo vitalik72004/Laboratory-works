@@ -9,31 +9,20 @@ namespace Lab1_1
     {
         // TASK 11-14 масив
         // Пошук перебором
-        static void Task11()
+        static void Task11(int[] arr, int n)
         {
             Console.Clear();
-            int n, x;
-            int[] arr1;
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Пошук перебором");
-            Console.WriteLine("Введіть кількість елементів масиву:");
-            n = Convert.ToInt32(Console.ReadLine());
-            arr1 = new int[n];
-            Random aRand = new Random();
-            for (int i = 0; i < arr1.Length; i++)
-                arr1[i] = aRand.Next(100);
-            Console.WriteLine("Масив з " + n + " елементів");
-            for (int i = 0; i < arr1.Length; i++)
-                Console.Write(arr1[i] + "  ");
             Console.WriteLine("\nВведіть шукане число:");
-            x = Convert.ToInt32(Console.ReadLine());
+            int x = Convert.ToInt32(Console.ReadLine());
             int r = 0;
             bool Found = true;
             while ((r < n) && ( Found != false ))
             {
-                if (arr1[r] == x)
+                if (arr[r] == x)
                 {
-                    Console.WriteLine("Число " + x + " знаходиться під індексом: " + r);
+                    Console.WriteLine("Число " + x + " знайдено");
                     Found = false;
                 }
                 else r++;
@@ -45,32 +34,26 @@ namespace Lab1_1
             Console.Clear();
         }
         //Пошук з бар'єром
-        static void Task12()
+        static void Task12(int[] arr, int n)
         {
             Console.Clear();
-            int n, x;
-            int[] arr2;
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Пошук з бар'єром");
-            Console.WriteLine("Введіть кількість елементів масиву:");
-            n = Convert.ToInt32(Console.ReadLine());
-            arr2 = new int[n+1];
-            Random aRand = new Random();
-            for (int i = 0; i < n; i++)
-                arr2[i] = aRand.Next(100);
-            Console.WriteLine("Масив з " + n + " елементів");
-            for (int i = 0; i < n; i++)
-                Console.Write(arr2[i] + "  ");
             Console.WriteLine("\nВведіть шукане число:");
-            x = Convert.ToInt32(Console.ReadLine());
+            int x = Convert.ToInt32(Console.ReadLine());
             int r = 0;
+            int[] arr2 = new int[n+1];
+            for (int i=0; i<n; i++)
+                arr2[i] = arr[i];
             arr2[n] = x;
+            for (int i = 0; i < arr2.Length; i++)
+                Console.Write(arr2[i] + "  ");
             while (arr2[r]!=x)
             {
                 r++;
             }
             if (r < n)
-                Console.WriteLine("Число " + x + " знаходиться під індексом: " + r);
+                Console.WriteLine("Число " + x + " знайдено");
             else
                 Console.WriteLine("Такого числа не має у масиві");
             Console.WriteLine("\nНатиснiть будь-яку клавiшу для повернення у меню:");
@@ -78,20 +61,11 @@ namespace Lab1_1
             Console.Clear();
         }
         //Бінарний пошук(стандарт)
-        static void Task13()
+        static int[] Task13(int[] arr3, int n)
         {
             Console.Clear();
-            int n, x;
-            int[] arr3;
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Бінарний пошук(стандарт)");
-            Console.WriteLine("Введіть кількість елементів масиву:");
-            n = Convert.ToInt32(Console.ReadLine());
-            arr3 = new int[n];
-            Random aRand = new Random();
-            for (int i = 0; i < arr3.Length; i++)
-                arr3[i] = aRand.Next(100);
-            Console.WriteLine("Масив з " + n + " елементів");
             var len = arr3.Length;
             for (var i = 1; i < len; i++)
             {
@@ -108,7 +82,7 @@ namespace Lab1_1
             for (int i = 0; i < arr3.Length; i++)
                 Console.Write(arr3[i] + "  ");
             Console.WriteLine("\nВведіть шукане число:");
-            x = Convert.ToInt32(Console.ReadLine());
+            int x = Convert.ToInt32(Console.ReadLine());
             int l = 0;
             int r = n - 1;
             int m=0;
@@ -117,7 +91,7 @@ namespace Lab1_1
                 m = l + (r-l) / 2;
                 if (arr3[m] == x)
                 {
-                    Console.WriteLine("Число " + x + " знаходиться під індексом: " + m);
+                    Console.WriteLine("Число " + x + " знайдено");
                     break;
                 }
                 if (arr3[m] < x)
@@ -130,38 +104,15 @@ namespace Lab1_1
             Console.WriteLine("\nНатиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
             Console.Clear();
+            return arr3;
         }
-        static void Task14()
+        static void Task14(int[] arr3, int n)
         {
             Console.Clear();
-            int n, x;
-            int[] arr3;
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Бінарний пошук(стандарт)");
-            Console.WriteLine("Введіть кількість елементів масиву:");
-            n = Convert.ToInt32(Console.ReadLine());
-            arr3 = new int[n];
-            Random aRand = new Random();
-            for (int i = 0; i < arr3.Length; i++)
-                arr3[i] = aRand.Next(100);
-            Console.WriteLine("Масив з " + n + " елементів");
-            var len = arr3.Length;
-            for (var i = 1; i < len; i++)
-            {
-                for (var j = 0; j < len - i; j++)
-                {
-                    if (arr3[j] > arr3[j + 1])
-                    {
-                        var temp = arr3[j];
-                        arr3[j] = arr3[j + 1];
-                        arr3[j + 1] = temp;
-                    }
-                }
-            }
-            for (int i = 0; i < arr3.Length; i++)
-                Console.Write(arr3[i] + "  ");
             Console.WriteLine("\nВведіть шукане число:");
-            x = Convert.ToInt32(Console.ReadLine());
+            int x = Convert.ToInt32(Console.ReadLine());
             int l = 0;
             int r = n - 1;
             int m = 0;
@@ -170,7 +121,7 @@ namespace Lab1_1
                 m = l + (r - l) / 6;
                 if (arr3[m] == x)
                 {
-                    Console.WriteLine("Число " + x + " знаходиться під індексом: " + m);
+                    Console.WriteLine("Число " + x + " знайдено");
                     break;
                 }
                 if (arr3[m] < x)
@@ -213,7 +164,7 @@ namespace Lab1_1
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
-        static void Menu1()
+        static void Menu1(int[] arr, int n)
         {
             Console.Clear();
             Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -233,10 +184,10 @@ namespace Lab1_1
             int key = Convert.ToInt32(Console.ReadLine());
             switch (key)
             {
-                case 1: Task11(); Menu1(); break;
-                case 2: Task12(); Menu1(); break;
-                case 3: Task13(); Menu1(); break;
-                case 4: Task14(); Menu1(); break;
+                case 1: Task11(arr, n); Menu1(arr, n); break;
+                case 2: Task12(arr, n); Menu1(arr, n); break;
+                case 3: Task13(arr, n); Menu1(arr, n); break;
+                case 4: Task14(arr, n); Menu1(arr, n); break;
                 default: break;
             }
         }
@@ -284,7 +235,17 @@ namespace Lab1_1
             int key = Convert.ToInt32(Console.ReadLine());
             switch (key)
             {
-                case 1: Menu1(); Main(); break;
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Введіть кількість елементів масиву:");
+                    int n1 = Convert.ToInt32(Console.ReadLine());
+                    int[] arr = new int[n1];
+                    Random aRand = new Random();
+                    for (int i = 0; i < arr.Length; i++)
+                        arr[i] = aRand.Next(100);
+                    Menu1(arr, n1); 
+                    Main(); 
+                    break;
                 case 2: Menu2(); Main(); break;
                 default: break;
             }
