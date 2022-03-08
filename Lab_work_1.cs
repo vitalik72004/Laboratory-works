@@ -79,8 +79,6 @@ namespace Lab1_1
                     }
                 }
             }
-            for (int i = 0; i < arr3.Length; i++)
-                Console.Write(arr3[i] + "  ");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             int l = 0;
@@ -136,28 +134,57 @@ namespace Lab1_1
             Console.Clear();
         }
         //TASK 21-24 лінійний зв`язний список
-        static void Task21()
+        static void Task21(LinkedList<int> List, int n)
+        {
+            Console.Clear();
+            Console.WriteLine("Структура даних: лінійний зв’язний список");
+            Console.WriteLine("\nВведіть шукане число:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            bool isFound = false;
+            foreach (var i in List)
+                if (i == x)
+                {
+                    Console.WriteLine("\nЧисло " + x + " знайдено");
+                    isFound = true;
+                    break;
+                }
+            if (!isFound)
+                Console.WriteLine("\nЧисло " + x + " не знайдено");
+            Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
+            Console.ReadKey();
+        }
+        static void Task22(LinkedList<int> List, int n)
+        {
+            Console.Clear();
+            Console.WriteLine("Структура даних: лінійний зв’язний список");
+            Console.WriteLine("\nВведіть шукане число:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            List.AddLast(x);
+            int i = 0;
+            foreach (var item in List)
+            {
+                i++;
+                if (item == x)
+                {
+                    break;
+                }
+            }
+            List.RemoveLast();
+            if (i < n)
+                Console.WriteLine("Число " + x + " знайдено");
+            else
+                Console.WriteLine("Число " + x + " не знайдено");
+            Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
+            Console.ReadKey();
+        }
+        static void Task23(LinkedList<int> List, int n)
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
-        static void Task22()
-        {
-            Console.Clear();
-            Console.WriteLine("Структура даних: лінійний зв’язний список");
-            Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
-            Console.ReadKey();
-        }
-        static void Task23()
-        {
-            Console.Clear();
-            Console.WriteLine("Структура даних: лінійний зв’язний список");
-            Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
-            Console.ReadKey();
-        }
-        static void Task24()
+        static void Task24(LinkedList<int> List, int n)
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
@@ -191,7 +218,7 @@ namespace Lab1_1
                 default: break;
             }
         }
-        static void Menu2()
+        static void Menu2(LinkedList<int> List, int n)
         {
             Console.Clear();
             Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -211,10 +238,10 @@ namespace Lab1_1
             int key = Convert.ToInt32(Console.ReadLine());
             switch (key)
             {
-                case 1: Task21(); Menu2(); break;
-                case 2: Task22(); Menu2(); break;
-                case 3: Task23(); Menu2(); break;
-                case 4: Task24(); Menu2(); break;
+                case 1: Task21(List, n); Menu2(List, n); break;
+                case 2: Task22(List, n); Menu2(List, n); break;
+                case 3: Task23(List, n); Menu2(List, n); break;
+                case 4: Task24(List, n); Menu2(List, n); break;
                 default: break;
             }
         }
@@ -242,11 +269,22 @@ namespace Lab1_1
                     int[] arr = new int[n1];
                     Random aRand = new Random();
                     for (int i = 0; i < arr.Length; i++)
-                        arr[i] = aRand.Next(100);
-                    Menu1(arr, n1); 
-                    Main(); 
+                        arr[i] = aRand.Next(0,1000);
+                    Menu1(arr, n1);
+                    Main();
                     break;
-                case 2: Menu2(); Main(); break;
+                case 2:
+                    Console.Clear();
+                    Console.WriteLine("Введіть кількість елементів списку:");
+                    int n2 = Convert.ToInt32(Console.ReadLine());
+                    Random aRand2 = new Random();
+                    LinkedList<int> List = new LinkedList<int>();
+                    List.AddFirst(aRand2.Next(0,1000));
+                    for (int i = 0; i < n2; i++)
+                        List.AddLast(aRand2.Next(0,1000));
+                    Menu2(List,n2);
+                    Main();
+                    break;
                 default: break;
             }
         }
