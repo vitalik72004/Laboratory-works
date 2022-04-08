@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Console_Lab._1;
 
 namespace Lab1_1
 {
@@ -134,68 +135,101 @@ namespace Lab1_1
             Console.Clear();
         }
         //TASK 21-24 лінійний зв`язний список
-        static void Task21(LinkedList<int> List, int n)
+        static void Task21(Node head, int n)
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             bool isFound = false;
-            foreach (var i in List)
-                if (i == x)
+            for (int i = 0; i < n; i++)
+                if (head.data == x)
                 {
                     Console.WriteLine("\nЧисло " + x + " знайдено");
                     isFound = true;
                     break;
                 }
+                else 
+                    head = head.next;
             if (!isFound)
                 Console.WriteLine("\nЧисло " + x + " не знайдено");
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
-        static void Task22(LinkedList<int> List, int n)
+        static void Task22(Node head, int n)
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
-            List.AddLast(x);
-            int i = 0;
-            foreach (var item in List)
+            head = BinarySearch.push(head, x);
+            int k = 0;
+            for (int i = 0; i < n; i++)
             {
-                i++;
-                if (item == x)
-                {
+                k++;
+                if (head.data == x)
                     break;
-                }
+                else head = head.next;
             }
-            List.RemoveLast();
-            if (i < n)
+            if (k < n)
                 Console.WriteLine("Число " + x + " знайдено");
             else
                 Console.WriteLine("Число " + x + " не знайдено");
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
-        static void Task23(LinkedList<int> List, int n)
+        static void Task23(Node head, int n)
+        {
+            Console.Clear();
+            Console.WriteLine("Структура даних: лінійний зв’язний список");
+            Node head2 = head;
+            Console.WriteLine("\nВведіть шукане число:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            if (BinarySearch.binarySearch(head, x) == null)
+            {
+                Console.WriteLine("Число " + x + " не знайдено");
+            }
+            else
+            {
+                Console.WriteLine("Число " + x + " знайдено");
+            }
+            Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
+            Console.ReadKey();
+        }
+        static void Task24(Node head, int n)
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
-        static void Task24(LinkedList<int> List, int n)
+        static void Menu2(Node Head, Node head2, int n)
         {
             Console.Clear();
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("Структура даних: лінійний зв’язний список");
-            Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
-            Console.ReadKey();
+            Console.ResetColor();
+            Console.WriteLine("Завдання:");
+            Console.WriteLine("1. Пошук перебором");
+            Console.WriteLine("2. Пошук з бар'єром");
+            Console.WriteLine("3. Бінарний пошук(стандарт)");
+            Console.WriteLine("4. Бінарний пошук(згідно з правилом золотого перерізу)");
+            Console.WriteLine("Для повернення у попереднє меню натисність будь-яку iншу клавiшу");
+            Console.WriteLine("Виберiть завдання:");
+            int key = Convert.ToInt32(Console.ReadLine());
+            switch (key)
+            {
+                case 1: Task21(Head, n); Menu2(Head, head2, n); break;
+                case 2: Task22(Head, n); Menu2(Head, head2, n); break;
+                case 3: Task23(head2, n); Menu2(Head, head2, n); break;
+                case 4: Task24(head2, n); Menu2(Head, head2, n); break;
+                default: break;
+            }
         }
-        static void Menu1(int[] arr, int n)
+        static void Menu1(int[] arr, int[] arr3, int n)
         {
-            Console.Clear();
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            Console.InputEncoding = System.Text.Encoding.Unicode;
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -211,52 +245,52 @@ namespace Lab1_1
             int key = Convert.ToInt32(Console.ReadLine());
             switch (key)
             {
-                case 1: Task11(arr, n); Menu1(arr, n); break;
-                case 2: Task12(arr, n); Menu1(arr, n); break;
-                case 3: Task13(arr, n); Menu1(arr, n); break;
-                case 4: Task14(arr, n); Menu1(arr, n); break;
-                default: break;
-            }
-        }
-        static void Menu2(LinkedList<int> List, int n)
-        {
-            Console.Clear();
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            Console.InputEncoding = System.Text.Encoding.Unicode;
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine("Структура даних: лінійний зв’язний список");
-            Console.ResetColor();
-            Console.WriteLine("Завдання:");
-            Console.WriteLine("1. Пошук перебором");
-            Console.WriteLine("2. Пошук з бар'єром");
-            Console.WriteLine("3. Бінарний пошук(стандарт)");
-            Console.WriteLine("4. Бінарний пошук(згідно з правилом золотого перерізу)");
-            Console.WriteLine("Для повернення у попереднє меню натисність будь-яку iншу клавiшу");
-            Console.WriteLine("Виберiть завдання:");
-            int key = Convert.ToInt32(Console.ReadLine());
-            switch (key)
-            {
-                case 1: Task21(List, n); Menu2(List, n); break;
-                case 2: Task22(List, n); Menu2(List, n); break;
-                case 3: Task23(List, n); Menu2(List, n); break;
-                case 4: Task24(List, n); Menu2(List, n); break;
+                case 1: Task11(arr, n); Menu1(arr, arr3, n); break;
+                case 2: Task12(arr, n); Menu1(arr, arr3, n); break;
+                case 3: Task13(arr3, n); Menu1(arr, arr3, n); break;
+                case 4: Task14(arr3, n); Menu1(arr, arr3, n); break;
                 default: break;
             }
         }
         static void Main()
         {
+            Console.Clear(); 
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
-            Console.Clear();
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("Лабораторна робота 1");
             Console.ResetColor();
-            Console.WriteLine("Виберіть структуру данних:");
-            Console.WriteLine("1. Масив");
-            Console.WriteLine("2. Лінійний зв’язаний список");
+            Node head = null;
+            Node head2 = null;
+            Console.WriteLine("Введіть кількість елементів масиву:");
+            int n1 = Convert.ToInt32(Console.ReadLine());
+            int[] arr = new int[n1];
+            Random aRand = new Random();
+            for (int i = 0; i < arr.Length; i++)
+                arr[i] = aRand.Next(0, 10);
+            for (int i = 0; i < arr.Length; i++)
+                head = BinarySearch.push(head, arr[i]);
+            int[] arr3 = new int[n1];
+            for (int i = 0; i < arr.Length; i++)
+                arr3[i] = arr[i];
+            var len = arr3.Length;
+            for (var i = 1; i < len; i++)
+            {
+                for (var j = 0; j < len - i; j++)
+                {
+                    if (arr3[j] > arr3[j + 1])
+                    {
+                        int temp = arr3[j];
+                        arr3[j] = arr3[j + 1];
+                        arr3[j + 1] = temp;
+                    }
+                }
+            }
+            for (int i = arr3.Length-1; i >= 0; i--)
+                head2 = BinarySearch.push(head2, arr3[i]);
+            Console.WriteLine("\nВиберіть структуру данних:");
+            Console.WriteLine("1. Масив/Лінійний зв’язаний список");
             Console.WriteLine("Для завершення роботи натисність будь-яку iншу клавiшу");
             Console.WriteLine("Виберiть завдання:");
             int key = Convert.ToInt32(Console.ReadLine());
@@ -264,25 +298,8 @@ namespace Lab1_1
             {
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Введіть кількість елементів масиву:");
-                    int n1 = Convert.ToInt32(Console.ReadLine());
-                    int[] arr = new int[n1];
-                    Random aRand = new Random();
-                    for (int i = 0; i < arr.Length; i++)
-                        arr[i] = aRand.Next(0,1000);
-                    Menu1(arr, n1);
-                    Main();
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.WriteLine("Введіть кількість елементів списку:");
-                    int n2 = Convert.ToInt32(Console.ReadLine());
-                    Random aRand2 = new Random();
-                    LinkedList<int> List = new LinkedList<int>();
-                    List.AddFirst(aRand2.Next(0,1000));
-                    for (int i = 0; i < n2; i++)
-                        List.AddLast(aRand2.Next(0,1000));
-                    Menu2(List,n2);
+                    Menu1(arr, arr3, n1);
+                    Menu2(head, head2, n1);
                     Main();
                     break;
                 default: break;
