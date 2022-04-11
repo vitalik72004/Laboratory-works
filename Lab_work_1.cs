@@ -182,7 +182,11 @@ namespace Lab1_1
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
-            Node head2 = head;
+            //for (int i = 0; i < n; i++)
+            //{   
+            //    Console.Write(head.data + " ");
+            //    head = head.next;
+            //}
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             if (BinarySearch.binarySearch(head, x) == null)
@@ -200,6 +204,16 @@ namespace Lab1_1
         {
             Console.Clear();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
+            Console.WriteLine("\nВведіть шукане число:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            if (BinarySearch.binarySearch2(head, x) == null)
+            {
+                Console.WriteLine("Число " + x + " не знайдено");
+            }
+            else
+            {
+                Console.WriteLine("Число " + x + " знайдено");
+            }
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
@@ -268,7 +282,7 @@ namespace Lab1_1
             int[] arr = new int[n1];
             Random aRand = new Random();
             for (int i = 0; i < arr.Length; i++)
-                arr[i] = aRand.Next(0, 10);
+                arr[i] = aRand.Next(0,10);
             for (int i = 0; i < arr.Length; i++)
                 head = BinarySearch.push(head, arr[i]);
             int[] arr3 = new int[n1];
@@ -287,7 +301,7 @@ namespace Lab1_1
                     }
                 }
             }
-            for (int i = arr3.Length-1; i >= 0; i--)
+            for (int i = 0; i < arr3.Length; i++)
                 head2 = BinarySearch.push(head2, arr3[i]);
             Console.WriteLine("\nВиберіть структуру данних:");
             Console.WriteLine("1. Масив/Лінійний зв’язаний список");
