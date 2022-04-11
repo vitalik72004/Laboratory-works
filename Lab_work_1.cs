@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Console_Lab._1;
+using System.Diagnostics;
 
 namespace Lab1_1
 {
@@ -13,23 +14,30 @@ namespace Lab1_1
         static void Task11(int[] arr, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Пошук перебором");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             int r = 0;
             bool Found = true;
+            stopWatch.Start();
             while ((r < n) && ( Found != false ))
             {
                 if (arr[r] == x)
                 {
+                    stopWatch.Stop();
                     Console.WriteLine("Число " + x + " знайдено");
                     Found = false;
                 }
                 else r++;
             }
+            stopWatch.Stop();
             if (r == n)
                 Console.WriteLine("Такого числа не має у масиві");
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("\nНатиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
             Console.Clear();
@@ -38,6 +46,8 @@ namespace Lab1_1
         static void Task12(int[] arr, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Пошук з бар'єром");
             Console.WriteLine("\nВведіть шукане число:");
@@ -47,16 +57,19 @@ namespace Lab1_1
             for (int i=0; i<n; i++)
                 arr2[i] = arr[i];
             arr2[n] = x;
-            for (int i = 0; i < arr2.Length; i++)
-                Console.Write(arr2[i] + "  ");
+            stopWatch.Start();
             while (arr2[r]!=x)
             {
+                stopWatch.Stop();
                 r++;
             }
+            stopWatch.Stop();
             if (r < n)
                 Console.WriteLine("Число " + x + " знайдено");
             else
                 Console.WriteLine("Такого числа не має у масиві");
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("\nНатиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
             Console.Clear();
@@ -65,31 +78,22 @@ namespace Lab1_1
         static int[] Task13(int[] arr3, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Бінарний пошук(стандарт)");
-            var len = arr3.Length;
-            for (var i = 1; i < len; i++)
-            {
-                for (var j = 0; j < len - i; j++)
-                {
-                    if (arr3[j] > arr3[j + 1])
-                    {
-                        var temp = arr3[j];
-                        arr3[j] = arr3[j + 1];
-                        arr3[j + 1] = temp;
-                    }
-                }
-            }
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             int l = 0;
             int r = n - 1;
             int m=0;
+            stopWatch.Start();
             while ((l <= r))
             {
                 m = l + (r-l) / 2;
                 if (arr3[m] == x)
                 {
+                    stopWatch.Stop();
                     Console.WriteLine("Число " + x + " знайдено");
                     break;
                 }
@@ -98,8 +102,11 @@ namespace Lab1_1
 
                 else r = m-1;
             }
+            stopWatch.Stop();
             if (arr3[m] != x)
                 Console.WriteLine("Такого числа не має у масиві");
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("\nНатиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
             Console.Clear();
@@ -108,6 +115,8 @@ namespace Lab1_1
         static void Task14(int[] arr3, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: масив");
             Console.WriteLine("Бінарний пошук(стандарт)");
             Console.WriteLine("\nВведіть шукане число:");
@@ -115,11 +124,13 @@ namespace Lab1_1
             int l = 0;
             int r = n - 1;
             int m = 0;
+            stopWatch.Start();
             while ((l <= r))
             {
                 m = l + (r - l) / 6;
                 if (arr3[m] == x)
                 {
+                    stopWatch.Stop();
                     Console.WriteLine("Число " + x + " знайдено");
                     break;
                 }
@@ -128,8 +139,11 @@ namespace Lab1_1
 
                 else r = m - 1;
             }
+            stopWatch.Stop();
             if (arr3[m] != x)
                 Console.WriteLine("Такого числа не має у масиві");
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("\nНатиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
             Console.Clear();
@@ -138,82 +152,109 @@ namespace Lab1_1
         static void Task21(Node head, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             bool isFound = false;
+            stopWatch.Start();
             for (int i = 0; i < n; i++)
+            {
                 if (head.data == x)
                 {
+                    stopWatch.Stop();
                     Console.WriteLine("\nЧисло " + x + " знайдено");
                     isFound = true;
                     break;
                 }
-                else 
+                else
                     head = head.next;
+            }
+            stopWatch.Stop();
             if (!isFound)
                 Console.WriteLine("\nЧисло " + x + " не знайдено");
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
         static void Task22(Node head, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
             head = BinarySearch.push(head, x);
             int k = 0;
+            stopWatch.Start();
             for (int i = 0; i < n; i++)
             {
                 k++;
                 if (head.data == x)
+                {
+                    stopWatch.Stop();
                     break;
+                }
                 else head = head.next;
             }
+            stopWatch.Stop();
             if (k < n)
                 Console.WriteLine("Число " + x + " знайдено");
             else
                 Console.WriteLine("Число " + x + " не знайдено");
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
         static void Task23(Node head, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
-            //for (int i = 0; i < n; i++)
-            //{   
-            //    Console.Write(head.data + " ");
-            //    head = head.next;
-            //}
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
+            stopWatch.Start();
             if (BinarySearch.binarySearch(head, x) == null)
             {
+                stopWatch.Stop();
                 Console.WriteLine("Число " + x + " не знайдено");
             }
             else
             {
+                stopWatch.Stop();
                 Console.WriteLine("Число " + x + " знайдено");
             }
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
         static void Task24(Node head, int n)
         {
             Console.Clear();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Reset();
             Console.WriteLine("Структура даних: лінійний зв’язний список");
             Console.WriteLine("\nВведіть шукане число:");
             int x = Convert.ToInt32(Console.ReadLine());
+            stopWatch.Start();
             if (BinarySearch.binarySearch2(head, x) == null)
             {
+                stopWatch.Stop();
                 Console.WriteLine("Число " + x + " не знайдено");
             }
             else
             {
+                stopWatch.Stop();
                 Console.WriteLine("Число " + x + " знайдено");
             }
+            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("\nЗатрачено часу в мілісекундах: " + ts.TotalMilliseconds);
             Console.WriteLine("Натиснiть будь-яку клавiшу для повернення у меню:");
             Console.ReadKey();
         }
