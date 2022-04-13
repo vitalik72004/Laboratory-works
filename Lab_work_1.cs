@@ -112,6 +112,7 @@ namespace Lab1_1
             Console.Clear();
             return arr3;
         }
+        // бінарний пошук за правилом золотого перерізу.
         static void Task14(int[] arr3, int n)
         {
             Console.Clear();
@@ -336,9 +337,7 @@ namespace Lab1_1
                 {
                     if (arr3[j] > arr3[j + 1])
                     {
-                        int temp = arr3[j];
-                        arr3[j] = arr3[j + 1];
-                        arr3[j + 1] = temp;
+                        (arr3[j + 1], arr3[j]) = (arr3[j], arr3[j + 1]);
                     }
                 }
             }
